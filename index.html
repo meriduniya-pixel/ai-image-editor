@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Studio - All-in-One Generator & Canvas Editor</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen">
+
+  <!-- Navigation Bar -->
+  <nav class="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-900/80 backdrop-blur-md sticky top-0 z-40">
+    <div class="flex items-center space-x-2">
+      <i data-lucide="wand-2" class="w-7 h-7 text-indigo-500"></i>
+      <span class="text-xl font-bold tracking-tight text-white">GenAI <span class="text-indigo-500">Studio</span></span>
+    </div>
+    
+    <div class="flex items-center space-x-4">
+      <button onclick="switchTab('landing')" class="text-slate-300 hover:text-white px-3 py-2 text-sm font-medium">Home</button>
+      <button onclick="openAuthModal()" class="text-slate-300 hover:text-white px-3 py-2 text-sm font-medium">History</button>
+      <button onclick="openAuthModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl text-sm font-semibold transition shadow-lg shadow-indigo-600/30">
+        Sign In / Sign Up
+      </button>
+    </div>
+  </nav>
+
+  <!-- LANDING PAGE VIEW -->
+  <div id="landingView">
+    <!-- Hero Section -->
+    <section class="max-w-5xl mx-auto text-center px-6 pt-20 pb-16">
+      <div class="inline-flex items-center space-x-2 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 px-4 py-1.5 rounded-full text-xs font-semibold mb-6">
+        <i data-lucide="sparkles" class="w-4 h-4"></i>
+        <span>1 Free Credit on First Signup!</span>
+      </div>
+      <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+        Create, Edit & Design with <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-pink-500">Next-Gen AI Power</span>
+      </h1>
+      <p class="text-slate-400 text-base md:text-lg max-w-2xl mx-auto mb-10">
+        Generate high-quality images, edit on an interactive inline canvas, and export docs or presentations instantly in one simple dashboard.
+      </p>
+      
+      <div class="flex justify-center items-center gap-4">
+        <button onclick="openAuthModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-3.5 rounded-xl font-bold text-base transition shadow-xl shadow-indigo-600/30">
+          Claim 1 Free Credit
+        </button>
+        <a href="#pricing" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-6 py-3.5 rounded-xl font-semibold text-base border border-slate-700 transition">
+          View Plans
+        </a>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="max-w-6xl mx-auto px-6 py-16 border-t border-slate-800">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-white mb-3">Simple & Flexible Pricing</h2>
+        <p class="text-slate-400 text-sm">Choose a plan that fits your creative needs.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Trial Plan -->
+        <div class="bg-slate-800/50 border border-slate-700/80 rounded-2xl p-6 flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Day Pass</span>
+            <div class="flex items-baseline my-4">
+              <span class="text-4xl font-extrabold text-white">$1</span>
+              <span class="text-slate-400 text-sm ml-2">/ 1 Day</span>
+            </div>
+            <ul class="space-y-3 text-sm text-slate-300 mb-6">
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mr-2"></i> Limited Credits Access</li>
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mr-2"></i> Canvas Editor Access</li>
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mr-2"></i> Standard Processing Speed</li>
+            </ul>
+          </div>
+          <button onclick="openAuthModal()" class="w-full bg-slate-700 hover:bg-slate-600 text-white font-medium py-2.5 rounded-xl transition">Get Started</button>
+        </div>
+
+        <!-- Pro Monthly (Popular) -->
+        <div class="bg-gradient-to-b from-indigo-900/40 to-slate-800/80 border-2 border-indigo-500 rounded-2xl p-6 flex flex-col justify-between relative shadow-2xl shadow-indigo-950">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Most Popular</div>
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-indigo-400">Pro Starter</span>
+            <div class="flex items-baseline my-4">
+              <span class="text-4xl font-extrabold text-white">$12</span>
+              <span class="text-slate-400 text-sm ml-2">/ Flexible Pack</span>
+            </div>
+            <ul class="space-y-3 text-sm text-slate-300 mb-6">
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mr-2"></i> Higher Allocated Credits</li>
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mr-2"></i> Full Canvas Editor Tools</li>
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mr-2"></i> HD Image Downloads</li>
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mr-2"></i> Save History & Prompts</li>
+            </ul>
+          </div>
+          <button onclick="openAuthModal()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2.5 rounded-xl transition shadow-lg shadow-indigo-600/30">Buy Now</button>
+        </div>
+
+        <!-- Unlimited/Custom Plan -->
+        <div class="bg-slate-800/50 border border-slate-700/80 rounded-2xl p-6 flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Enterprise</span>
+            <div class="flex items-baseline my-4">
+              <span class="text-4xl font-extrabold text-white">$100</span>
+              <span class="text-slate-400 text-sm ml-2">/ Month</span>
+            </div>
+            <ul class="space-y-3 text-sm text-slate-300 mb-6">
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mr-2"></i> Unlimited AI Generations*</li>
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mr-2"></i> Priority API Processing</li>
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mr-2"></i> DOCX/PDF/PPT Export</li>
+            </ul>
+          </div>
+          <button onclick="openAuthModal()" class="w-full bg-slate-700 hover:bg-slate-600 text-white font-medium py-2.5 rounded-xl transition">Contact Sales</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- USER DASHBOARD VIEW (History & Search Results) -->
+  <div id="dashboardView" class="hidden max-w-6xl mx-auto px-6 py-10">
+    <div class="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-slate-800 mb-8">
+      <div>
+        <h1 class="text-2xl font-bold text-white">Welcome Back!</h1>
+        <p class="text-slate-400 text-sm">Your generation history and saved credit balance.</p>
+      </div>
+      <div class="flex items-center space-x-3 mt-4 md:mt-0">
+        <div class="bg-slate-800 border border-slate-700 px-4 py-2 rounded-xl flex items-center space-x-2">
+          <i data-lucide="coins" class="w-4 h-4 text-amber-400"></i>
+          <span class="text-sm font-semibold text-white">Credits: <span id="userCredits" class="text-amber-400">1</span></span>
+        </div>
+        <button onclick="switchTab('landing')" class="bg-rose-600/20 text-rose-400 hover:bg-rose-600/30 px-3 py-2 rounded-xl text-sm font-medium">Log Out</button>
+      </div>
+    </div>
+
+    <!-- Search History / Generated Section -->
+    <div>
+      <h2 class="text-lg font-bold text-white mb-4 flex items-center">
+        <i data-lucide="history" class="w-5 h-5 text-indigo-400 mr-2"></i> Your Recent History
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Sample History Item -->
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 overflow-hidden">
+          <div class="aspect-video bg-slate-900 rounded-lg mb-3 flex items-center justify-center text-slate-600">
+            <i data-lucide="image" class="w-10 h-10"></i>
+          </div>
+          <p class="text-xs text-indigo-400 font-semibold mb-1">Generated Image</p>
+          <p class="text-sm text-slate-200 font-medium line-clamp-2">"A futuristic cyberpunk city in neon colors at night..."</p>
+          <div class="mt-4 flex justify-between items-center text-xs text-slate-400 pt-3 border-t border-slate-700/50">
+            <span>2 hours ago</span>
+            <button class="text-indigo-400 hover:text-indigo-300 font-medium">Open in Editor</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTH MODAL (Login/Signup with Country Code & OTP) -->
+  <div id="authModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
+    <div class="bg-slate-800 border border-slate-700 w-full max-w-md rounded-2xl p-6 relative shadow-2xl">
+      <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <h3 class="text-xl font-bold text-white mb-1">Sign In / Sign Up</h3>
+      <p class="text-slate-400 text-xs mb-6">Create an account to get 1 Free Credit instantly.</p>
+
+      <!-- Step 1: User Information Entry -->
+      <form id="authForm" onsubmit="handleSendOTP(event)" class="space-y-4">
+        <!-- Social Login -->
+        <button type="button" onclick="simulateLogin()" class="w-full bg-slate-700 hover:bg-slate-600 text-white font-medium py-2.5 rounded-xl border border-slate-600 flex items-center justify-center space-x-2 text-sm transition">
+          <i data-lucide="chrome" class="w-4 h-4 text-red-400"></i>
+          <span>Continue with Google</span>
+        </button>
+
+        <div class="relative flex py-1 items-center">
+          <div class="flex-grow border-t border-slate-700"></div>
+          <span class="flex-shrink mx-3 text-slate-500 text-xs uppercase">Or with Details</span>
+          <div class="flex-grow border-t border-slate-700"></div>
+        </div>
+
+        <!-- Gmail Address -->
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Gmail / Email Address *</label>
+          <input type="email" required placeholder="example@gmail.com" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+        </div>
+
+        <!-- Mobile Number with Country Code -->
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Mobile Number *</label>
+          <div class="flex space-x-2">
+            <select class="bg-slate-900 border border-slate-700 rounded-xl px-2 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+              <option value="+91">🇮🇳 +91 (IN)</option>
+              <option value="+1">🇺🇸 +1 (US)</option>
+              <option value="+44">🇬🇧 +44 (UK)</option>
+              <option value="+971">🇦🇪 +971 (UAE)</option>
+            </select>
+            <input type="tel" required placeholder="9876543210" class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2.5 rounded-xl text-sm transition shadow-lg shadow-indigo-600/30">
+          Send OTP
+        </button>
+      </form>
+
+      <!-- Step 2: OTP Verification Screen (Hidden Initially) -->
+      <form id="otpForm" onsubmit="handleVerifyOTP(event)" class="space-y-4 hidden">
+        <p class="text-xs text-emerald-400">OTP Sent successfully to your Email and Mobile number.</p>
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Enter 4-Digit OTP</label>
+          <input type="text" maxlength="4" required placeholder="1234" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-center text-lg tracking-widest text-white focus:outline-none focus:border-indigo-500">
+        </div>
+        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2.5 rounded-xl text-sm transition shadow-lg shadow-emerald-600/30">
+          Verify & Get 1 Free Credit
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript Handler -->
+  <script>
+    // Initialize Icons
+    lucide.createIcons();
+
+    // Modal Control Functions
+    function openAuthModal() {
+      document.getElementById('authModal').classList.remove('hidden');
+    }
+
+    function closeAuthModal() {
+      document.getElementById('authModal').classList.add('hidden');
+      document.getElementById('authForm').classList.remove('hidden');
+      document.getElementById('otpForm').classList.add('hidden');
+    }
+
+    // Handle OTP Triggering
+    function handleSendOTP(e) {
+      e.preventDefault();
+      document.getElementById('authForm').classList.add('hidden');
+      document.getElementById('otpForm').classList.remove('hidden');
+    }
+
+    // Handle Login/Signup Completion
+    function handleVerifyOTP(e) {
+      e.preventDefault();
+      closeAuthModal();
+      switchTab('dashboard');
+    }
+
+    function simulateLogin() {
+      closeAuthModal();
+      switchTab('dashboard');
+    }
+
+    // Tab Switching Functionality
+    function switchTab(tab) {
+      if (tab === 'dashboard') {
+        document.getElementById('landingView').classList.add('hidden');
+        document.getElementById('dashboardView').classList.remove('hidden');
+      } else {
+        document.getElementById('landingView').classList.remove('hidden');
+        document.getElementById('dashboardView').classList.add('hidden');
+      }
+    }
+  </script>
+</body>
+</html>
